@@ -1,8 +1,7 @@
 import React, {  Component } from 'react';
 import './App.css';
-
 import Person from  './Person/Person';
-
+import styled from 'styled-components';
 
 class App extends Component {
   state = {
@@ -48,7 +47,7 @@ class App extends Component {
 
     person.name = event.target.value;
 
-    const persons = [... this.state.persons];
+    const persons = [...this.state.persons];
 
     persons[personIndex] = person;
 
@@ -69,13 +68,30 @@ class App extends Component {
 
     let persons = null;
 
+    const StyledButton =  styled.button`
+      background-color: ${props => props.alt ? 'red' : 'green'};
+      color: white;
+      font : inherit;
+      border : 1px solid white;
+      padding: 8px;
+      cursor : pointer;
+      &:hover  {
+        background-color :  ${props => props.alt ? 'salmon' : 'lightgreen'};
+        color : black;
+      };
+    `;
     const buttonStyle = {
       backgroundColor: 'green',
       color: 'white',
       font : 'inherit',
       border : '1px solid white',
       padding: '8px',
-      cursor : "pointer"
+      cursor : "pointer",
+      ':hover' : {
+        backgroundColor : 'lightGreen',
+        color: 'black',
+        
+      }
     }
 
     if ( this.state.showPersons) {
@@ -90,6 +106,12 @@ class App extends Component {
       );
 
       buttonStyle.backgroundColor = 'red';
+      
+      buttonStyle[ ':hover' ] = {
+        backgroundColor : 'salmon',
+        color: 'black',
+      
+      }
     }
 
     let classes = [ 'align'];
@@ -103,11 +125,12 @@ class App extends Component {
     }
     
     return (
-      <div>
+
+      <div className="App">
         <div>
         <h1 className='align'>React app</h1>
         <p className={classes.join(' ')}>This is working</p>
-        <button onClick = {this.tooglePersonHandler} style={buttonStyle} >Click me</button>
+        <StyledButton onClick = {this.tooglePersonHandler} alt = {this.state.showPersons}>Click me</StyledButton>
         </div>
         {/* {  this.state.showPersons  ? 
         
