@@ -1,7 +1,9 @@
 import React, {  Component } from 'react';
-import './App.css';
-import Person from  './Person/Person';
-import styled from 'styled-components';
+import classes from './App.css';
+import Person from  '../components/Persons/Person/Person';
+import Persons from  '../components/Persons/Persons';
+import Cockpit from  '../components/Persons/Cockpit/Cockpit';
+
 
 class App extends Component {
   state = {
@@ -68,70 +70,43 @@ class App extends Component {
 
     let persons = null;
 
-    const StyledButton =  styled.button`
-      background-color: ${props => props.alt ? 'red' : 'green'};
-      color: white;
-      font : inherit;
-      border : 1px solid white;
-      padding: 8px;
-      cursor : pointer;
-      &:hover  {
-        background-color :  ${props => props.alt ? 'salmon' : 'lightgreen'};
-        color : black;
-      };
-    `;
-    const buttonStyle = {
-      backgroundColor: 'green',
-      color: 'white',
-      font : 'inherit',
-      border : '1px solid white',
-      padding: '8px',
-      cursor : "pointer",
-      ':hover' : {
-        backgroundColor : 'lightGreen',
-        color: 'black',
-        
-      }
-    }
+    let  btnClasses = [classes.Button];
 
     if ( this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map((person, index) => {
+          {/* {this.state.persons.map((person, index) => {
             return (<h1 key={person.id}> <Person click = {() => {this.removePersonHandler(index)}} change = {(event) => {this.newNameHandler(event, person.id)}} name = {person.name} age={person.age}   /></h1>);
-          })}
-        
+          })} */}
+        <Persons 
+         persons={this.state.persons}  clicked = {this.removePersonHandler} change = {this.newNameHandler} />
         </div> 
 
       );
+      btnClasses.push(classes.Red);
 
-      buttonStyle.backgroundColor = 'red';
-      
-      buttonStyle[ ':hover' ] = {
-        backgroundColor : 'salmon',
-        color: 'black',
-      
-      }
+    
     }
 
-    let classes = [ 'align'];
+    let assignClasses = [ 'align'];
 
     if (this.state.persons.length <=2) {
-      classes.push('red');
+      assignClasses.push(classes.red);
     }
 
     if (this.state.persons.length <=1) {
-      classes.push('bold');
+      assignClasses.push(classes.bold);
     }
     
+
     return (
 
-      <div className="App">
-        <div>
-        <h1 className='align'>React app</h1>
-        <p className={classes.join(' ')}>This is working</p>
-        <StyledButton onClick = {this.tooglePersonHandler} alt = {this.state.showPersons}>Click me</StyledButton>
-        </div>
+      <div className={classes.App}>
+          <Cockpit    
+            assignClasses = {assignClasses}
+            btnClasses = {btnClasses}
+            tooglePersonHandler = {this.tooglePersonHandler}
+          />
         {/* {  this.state.showPersons  ? 
         
           <div>

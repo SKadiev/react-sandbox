@@ -3,4 +3,11 @@
   margin: auto;
   border: 2px solid gray;
   box-shadow: 0 2px 3px #ccc;
+  background: gray;
+}
+
+@media (min-width: 500px) {
+  .Person {
+    width: 450px;
+  }
 }
