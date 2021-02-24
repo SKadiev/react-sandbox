@@ -70,56 +70,28 @@ class App extends Component {
 
     let persons = null;
 
-    let  btnClasses = [classes.Button];
-
     if ( this.state.showPersons) {
       persons = (
         <div>
-          {/* {this.state.persons.map((person, index) => {
-            return (<h1 key={person.id}> <Person click = {() => {this.removePersonHandler(index)}} change = {(event) => {this.newNameHandler(event, person.id)}} name = {person.name} age={person.age}   /></h1>);
-          })} */}
-        <Persons 
-         persons={this.state.persons}  clicked = {this.removePersonHandler} change = {this.newNameHandler} />
+          <Persons 
+          persons={this.state.persons}  clicked = {this.removePersonHandler} changed = {this.newNameHandler} />
         </div> 
 
       );
-      btnClasses.push(classes.Red);
 
-    
     }
-
-    let assignClasses = [ 'align'];
-
-    if (this.state.persons.length <=2) {
-      assignClasses.push(classes.red);
-    }
-
-    if (this.state.persons.length <=1) {
-      assignClasses.push(classes.bold);
-    }
-    
 
     return (
 
       <div className={classes.App}>
-          <Cockpit    
-            assignClasses = {assignClasses}
-            btnClasses = {btnClasses}
-            tooglePersonHandler = {this.tooglePersonHandler}
+          <Cockpit 
+             persons = {this.state.persons}  
+             showPersons = {this.state.showPersons}   
+            clicked = {this.tooglePersonHandler}
           />
-        {/* {  this.state.showPersons  ? 
-        
-          <div>
-            <h1> <Person click = {this.changePerson.bind(this, 'pero')} name={this.state.persons[0].name} age={this.state.persons[0].age} /></h1>
-            <h1> <Person change = {this.newNameHandler} name = {this.state.persons[1].name} age={this.state.persons[1].age} /></h1>
-          </div> 
-          
-          : null
-        }  */}
         {persons}
       </div>
   
-      // React.createElement('div', {className : 'App'} , React.createElement('h1', null , <Person name = "tote" age="25" />))
     )
   }
 

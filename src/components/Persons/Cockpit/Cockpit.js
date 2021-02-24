@@ -1,22 +1,27 @@
 import React from 'react';
+import classes from  './Cockpit.css';
 
 const Cockpit = (props) => {
-
+    let  btnClasses = [classes.Button];
     let assignClasses = [ 'align'];
 
-    if (this.state.persons.length <=2) {
+    if (props.persons.length <=2) {
       assignClasses.push(classes.red);
     }
 
-    if (this.state.persons.length <=1) {
+    if (props.persons.length <=1) {
       assignClasses.push(classes.bold);
     }
     
+    if ( props.showPersons) {
+        btnClasses.push(classes.Red);
+    }
 
-    return (<div>
+
+    return (<div className={classes.Cockpit}>
         <h1 className='align'>React app</h1>
-        <p className={props.assignClasses.join(' ')}>This is working</p>
-        <button className={props.btnClasses.join(' ')} onClick = {props.tooglePersonHandler} >Click me</button>
+        <p className={assignClasses.join(' ')}>This is working</p>
+        <button className={btnClasses.join(' ')} onClick = {props.clicked} >Click me</button>
     </div>
     )
 }
